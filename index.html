@@ -985,7 +985,7 @@ async function handleSubmit(e){
   btn.textContent="Sending...";btn.disabled=true;btn.style.opacity="0.7";
   success.style.display="none";error.style.display="none";
   try{
-    const res=await fetch("https://formspree.io/f/xzzdqkdv",{
+    const res=await fetch("https://formspree.io/f/xbdzqjyz",{
       method:"POST",
       headers:{"Content-Type":"application/json","Accept":"application/json"},
       body:JSON.stringify({name:form.name.value,email:form.email.value,project:form.project.value,message:form.message.value})
