@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Ajay Kukreti — Data Analyst & AI Specialist</title>
+<link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Cabinet+Grotesk:wght@300;400;500;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#04080f;--bg2:#080f1e;--bg3:#0d1526;
+  --accent:#4f8ef7;--accent2:#22d3ee;--accent3:#a78bfa;
+  --green:#34d399;--amber:#fbbf24;--pink:#f472b6;
+  --text:#f0f4ff;--text2:#8899bb;--text3:#3d4f6e;
+  --border:rgba(79,142,247,0.12);--border2:rgba(79,142,247,0.25);
+  --glass:rgba(13,21,38,0.7);
+  --glow-blue:rgba(79,142,247,0.15);
+  --glow-cyan:rgba(34,211,238,0.1);
+  --glow-purple:rgba(167,139,250,0.1);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;overflow-x:hidden;line-height:1.6;cursor:default;}
+
+/* CUSTOM CURSOR */
+.cursor{position:fixed;width:8px;height:8px;background:var(--accent);border-radius:50%;pointer-events:none;z-index:9999;transition:transform 0.1s;mix-blend-mode:screen;}
+.cursor-ring{position:fixed;width:32px;height:32px;border:1px solid rgba(79,142,247,0.4);border-radius:50%;pointer-events:none;z-index:9998;transition:all 0.15s ease;}
+
+/* CANVAS PARTICLES */
+#particles{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0.6;}
+
+/* GRID OVERLAY */
+body::before{
+  content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:
+    linear-gradient(rgba(79,142,247,0.03) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(79,142,247,0.03) 1px,transparent 1px);
+  background-size:60px 60px;
+}
+
+/* NOISE TEXTURE */
+body::after{
+  content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0.025;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:0 48px;height:68px;
+  display:flex;justify-content:space-between;align-items:center;
+  background:rgba(4,8,15,0.8);
+  backdrop-filter:blur(24px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{
+  font-family:'Syne',sans-serif;font-weight:800;font-size:20px;
+  letter-spacing:-0.5px;position:relative;
+}
+.nav-logo span{
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.nav-links{display:flex;gap:32px;}
+.nav-links a{
+  color:var(--text2);text-decoration:none;font-size:13px;font-weight:400;
+  letter-spacing:0.3px;transition:color 0.2s;position:relative;
+}
+.nav-links a::after{
+  content:'';position:absolute;bottom:-2px;left:0;width:0;height:1px;
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+  transition:width 0.3s ease;
+}
+.nav-links a:hover{color:var(--text);}
+.nav-links a:hover::after{width:100%;}
+.nav-cta{
+  background:linear-gradient(135deg,var(--accent),#2563eb);
+  color:#fff;padding:9px 22px;border-radius:8px;
+  text-decoration:none;font-size:13px;font-weight:500;
+  box-shadow:0 0 20px rgba(79,142,247,0.3);
+  transition:transform 0.2s,box-shadow 0.2s;
+}
+.nav-cta:hover{transform:translateY(-1px);box-shadow:0 4px 30px rgba(79,142,247,0.5);}
+@media(max-width:768px){.nav-links{display:none;}}
+
+/* HERO */
+.hero{
+  min-height:100vh;display:flex;align-items:center;
+  padding:130px 48px 90px;position:relative;overflow:hidden;z-index:1;
+}
+.hero-orb1{
+  position:absolute;top:-200px;right:-150px;
+  width:700px;height:700px;border-radius:50%;
+  background:radial-gradient(circle,rgba(79,142,247,0.1) 0%,transparent 65%);
+  pointer-events:none;animation:orbFloat 8s ease-in-out infinite;
+}
+.hero-orb2{
+  position:absolute;bottom:-200px;left:-100px;
+  width:500px;height:500px;border-radius:50%;
+  background:radial-gradient(circle,rgba(167,139,250,0.07) 0%,transparent 65%);
+  pointer-events:none;animation:orbFloat 10s ease-in-out infinite reverse;
+}
+.hero-orb3{
+  position:absolute;top:40%;left:40%;
+  width:300px;height:300px;border-radius:50%;
+  background:radial-gradient(circle,rgba(34,211,238,0.05) 0%,transparent 65%);
+  pointer-events:none;animation:orbFloat 6s ease-in-out infinite 2s;
+}
+@keyframes orbFloat{
+  0%,100%{transform:translateY(0) scale(1);}
+  50%{transform:translateY(-30px) scale(1.05);}
+}
+.hero-inner{max-width:1100px;margin:0 auto;width:100%;position:relative;z-index:2;}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:10px;
+  background:rgba(79,142,247,0.08);
+  border:1px solid rgba(79,142,247,0.2);
+  border-radius:100px;padding:7px 18px;margin-bottom:36px;
+  font-size:12px;color:var(--accent2);font-weight:500;letter-spacing:0.8px;
+  backdrop-filter:blur(8px);
+  animation:fadeUp 0.8s ease 0.1s both;
+}
+.hero-dot{
+  width:7px;height:7px;border-radius:50%;background:var(--accent2);
+  box-shadow:0 0 8px var(--accent2);animation:pulse 2s infinite;
+}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.4;transform:scale(1.6);}}
+.hero h1{
+  font-family:'Syne',sans-serif;
+  font-size:clamp(48px,7vw,88px);
+  font-weight:800;line-height:1.0;letter-spacing:-3px;
+  animation:fadeUp 0.8s ease 0.2s both;
+}
+.hero h1 .grad{
+  background:linear-gradient(135deg,var(--accent) 0%,var(--accent2) 50%,var(--accent3) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.hero-tagline{
+  font-size:clamp(16px,2vw,21px);color:var(--text2);
+  font-weight:300;margin:26px 0 14px;max-width:640px;line-height:1.7;
+  animation:fadeUp 0.8s ease 0.3s both;
+}
+.hero-tagline strong{
+  color:var(--accent2);font-weight:500;
+  text-shadow:0 0 20px rgba(34,211,238,0.3);
+}
+.hero-desc{
+  font-size:15px;color:var(--text3);max-width:560px;line-height:1.8;
+  margin-bottom:40px;animation:fadeUp 0.8s ease 0.4s both;
+}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap;animation:fadeUp 0.8s ease 0.5s both;}
+.btn-glow{
+  background:linear-gradient(135deg,var(--accent),#2563eb);
+  color:#fff;padding:14px 28px;border-radius:10px;
+  text-decoration:none;font-size:14px;font-weight:500;
+  box-shadow:0 0 30px rgba(79,142,247,0.35),0 0 60px rgba(79,142,247,0.1);
+  transition:transform 0.2s,box-shadow 0.2s;position:relative;overflow:hidden;
+}
+.btn-glow::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(255,255,255,0.15),transparent);
+  opacity:0;transition:opacity 0.2s;
+}
+.btn-glow:hover{transform:translateY(-2px);box-shadow:0 8px 40px rgba(79,142,247,0.55),0 0 80px rgba(79,142,247,0.15);}
+.btn-glow:hover::before{opacity:1;}
+.btn-ghost{
+  background:rgba(79,142,247,0.05);color:var(--text);
+  padding:14px 28px;border-radius:10px;
+  text-decoration:none;font-size:14px;
+  border:1px solid var(--border2);
+  backdrop-filter:blur(8px);
+  transition:all 0.2s;
+}
+.btn-ghost:hover{background:rgba(79,142,247,0.1);border-color:rgba(79,142,247,0.4);transform:translateY(-2px);}
+.hero-stats{
+  display:flex;gap:0;margin-top:64px;
+  border:1px solid var(--border);border-radius:16px;
+  overflow:hidden;backdrop-filter:blur(12px);
+  background:rgba(8,15,30,0.6);
+  animation:fadeUp 0.8s ease 0.6s both;
+  max-width:580px;
+}
+.stat-item{
+  flex:1;padding:22px 24px;text-align:center;
+  border-right:1px solid var(--border);position:relative;
+}
+.stat-item:last-child{border-right:none;}
+.stat-num{font-family:'Syne',sans-serif;font-size:28px;font-weight:800;line-height:1;}
+.stat-num .accent{
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.stat-label{font-size:11px;color:var(--text3);margin-top:5px;letter-spacing:0.3px;}
+
+/* SECTION COMMONS */
+section{padding:100px 48px;position:relative;z-index:1;}
+.si{max-width:1100px;margin:0 auto;}
+.stag{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:11px;font-weight:600;letter-spacing:2.5px;
+  color:var(--accent2);text-transform:uppercase;margin-bottom:12px;
+}
+.stag::before{content:'';width:20px;height:1px;background:var(--accent2);}
+.stitle{
+  font-family:'Syne',sans-serif;
+  font-size:clamp(28px,4vw,46px);
+  font-weight:800;letter-spacing:-1.5px;margin-bottom:16px;line-height:1.1;
+}
+.stitle .grad{
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.sdesc{font-size:15px;color:var(--text2);max-width:520px;line-height:1.8;}
+.tag{
+  background:rgba(79,142,247,0.08);color:var(--accent2);
+  font-size:11px;padding:3px 10px;border-radius:100px;
+  border:1px solid rgba(79,142,247,0.18);
+}
+
+/* ABOUT */
+.about-section{background:linear-gradient(180deg,var(--bg) 0%,var(--bg2) 100%);}
+.about-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:70px;align-items:start;margin-top:56px;}
+@media(max-width:900px){.about-grid{grid-template-columns:1fr;gap:36px;}}
+.about-text p{font-size:15px;color:var(--text2);line-height:1.85;margin-bottom:18px;}
+.about-text p strong{color:var(--text);font-weight:500;}
+.about-cards{display:flex;flex-direction:column;gap:10px;}
+.acard{
+  background:var(--glass);border:1px solid var(--border);
+  border-radius:12px;padding:14px 18px;
+  display:flex;align-items:center;gap:14px;
+  backdrop-filter:blur(12px);
+  transition:border-color 0.2s,transform 0.2s;
+}
+.acard:hover{border-color:var(--border2);transform:translateX(4px);}
+.acard-icon{font-size:20px;width:40px;height:40px;border-radius:10px;background:rgba(79,142,247,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.acard-t{font-size:13px;font-weight:500;color:var(--text);margin-bottom:2px;}
+.acard-s{font-size:12px;color:var(--text2);}
+
+/* SKILLS */
+.skills-section{background:var(--bg2);}
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-top:52px;}
+.skill-card{
+  background:var(--glass);border:1px solid var(--border);
+  border-radius:16px;padding:22px 16px;text-align:center;
+  backdrop-filter:blur(12px);
+  transition:border-color 0.3s,transform 0.3s,box-shadow 0.3s;
+  position:relative;overflow:hidden;
+}
+.skill-card::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(79,142,247,0.04),transparent);
+  opacity:0;transition:opacity 0.3s;
+}
+.skill-card:hover{
+  border-color:rgba(79,142,247,0.35);
+  transform:translateY(-6px);
+  box-shadow:0 12px 40px rgba(79,142,247,0.1);
+}
+.skill-card:hover::before{opacity:1;}
+.skill-icon{font-size:30px;margin-bottom:10px;display:block;}
+.skill-name{font-family:'Syne',sans-serif;font-size:12px;font-weight:700;color:var(--text);margin-bottom:4px;}
+.skill-level{font-size:10px;color:var(--accent2);letter-spacing:0.3px;}
+.skill-bar-bg{height:2px;background:rgba(255,255,255,0.05);border-radius:2px;margin-top:10px;}
+.skill-bar{height:2px;border-radius:2px;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width 1.2s ease;}
+
+/* SERVICES */
+.services-section{background:linear-gradient(180deg,var(--bg2) 0%,var(--bg3) 100%);}
+.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:22px;margin-top:56px;}
+.svc-card{
+  background:var(--glass);border:1px solid var(--border);
+  border-radius:20px;padding:30px;
+  backdrop-filter:blur(16px);
+  transition:border-color 0.3s,transform 0.3s,box-shadow 0.3s;
+  position:relative;overflow:hidden;
+}
+.svc-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--accent),var(--accent2),transparent);
+  opacity:0;transition:opacity 0.3s;
+}
+.svc-card::after{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at top,rgba(79,142,247,0.04) 0%,transparent 60%);
+  opacity:0;transition:opacity 0.3s;pointer-events:none;
+}
+.svc-card:hover{border-color:rgba(79,142,247,0.3);transform:translateY(-6px);box-shadow:0 20px 50px rgba(0,0,0,0.3);}
+.svc-card:hover::before,.svc-card:hover::after{opacity:1;}
+.svc-icon-wrap{
+  width:56px;height:56px;border-radius:14px;
+  background:rgba(79,142,247,0.1);border:1px solid rgba(79,142,247,0.2);
+  display:flex;align-items:center;justify-content:center;
+  font-size:26px;margin-bottom:18px;
+}
+.svc-title{font-family:'Syne',sans-serif;font-size:19px;font-weight:700;margin-bottom:10px;}
+.svc-desc{font-size:13px;color:var(--text2);line-height:1.75;margin-bottom:16px;}
+.svc-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:20px;}
+.svc-divider{height:1px;background:var(--border);margin-bottom:20px;}
+.svc-bottom{display:flex;align-items:center;justify-content:space-between;}
+.svc-price{font-family:'Syne',sans-serif;font-size:24px;font-weight:800;}
+.svc-price .from{font-size:12px;font-weight:400;color:var(--text2);display:block;margin-bottom:2px;}
+.svc-price .amount{
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.svc-btn{
+  background:linear-gradient(135deg,var(--accent),#2563eb);
+  color:#fff;padding:10px 20px;border-radius:9px;
+  text-decoration:none;font-size:13px;font-weight:500;
+  transition:transform 0.2s,box-shadow 0.2s;
+  box-shadow:0 0 20px rgba(79,142,247,0.2);
+  white-space:nowrap;
+}
+.svc-btn:hover{transform:translateY(-2px);box-shadow:0 6px 25px rgba(79,142,247,0.45);}
+
+/* EXPERIENCE */
+.exp-section{background:var(--bg3);}
+.exp-list{margin-top:56px;}
+.exp-item{
+  display:grid;grid-template-columns:220px 1fr;gap:40px;
+  padding:36px 0;border-bottom:1px solid var(--border);
+  transition:padding 0.2s;
+}
+.exp-item:last-child{border-bottom:none;}
+@media(max-width:768px){.exp-item{grid-template-columns:1fr;gap:12px;}}
+.exp-meta{}
+.exp-period{
+  font-size:12px;color:var(--accent2);font-weight:500;
+  letter-spacing:0.5px;margin-bottom:6px;
+  display:flex;align-items:center;gap:6px;
+}
+.exp-period::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--accent2);box-shadow:0 0 8px var(--accent2);}
+.exp-location{font-size:12px;color:var(--text3);margin-bottom:12px;}
+.exp-duration{
+  display:inline-block;background:rgba(79,142,247,0.08);
+  border:1px solid var(--border);border-radius:6px;
+  padding:3px 10px;font-size:11px;color:var(--text2);
+}
+.exp-content{}
+.exp-company{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;margin-bottom:5px;letter-spacing:-0.5px;}
+.exp-role{
+  font-size:14px;margin-bottom:18px;font-weight:400;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.exp-points{list-style:none;display:flex;flex-direction:column;gap:8px;}
+.exp-points li{
+  font-size:13px;color:var(--text2);
+  padding-left:18px;position:relative;line-height:1.65;
+}
+.exp-points li::before{
+  content:'';position:absolute;left:0;top:8px;
+  width:5px;height:5px;border-radius:50%;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+}
+.exp-chip{
+  display:inline-block;
+  background:rgba(52,211,153,0.1);color:var(--green);
+  font-size:11px;padding:2px 8px;border-radius:4px;margin-left:8px;
+  border:1px solid rgba(52,211,153,0.2);font-weight:500;
+}
+
+/* PROJECTS */
+.projects-section{background:linear-gradient(180deg,var(--bg3) 0%,var(--bg) 100%);}
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:22px;margin-top:56px;}
+.proj-card{
+  background:var(--glass);border:1px solid var(--border);
+  border-radius:20px;overflow:hidden;
+  backdrop-filter:blur(12px);
+  transition:border-color 0.3s,transform 0.3s,box-shadow 0.3s;
+}
+.proj-card:hover{border-color:rgba(79,142,247,0.35);transform:translateY(-8px);box-shadow:0 24px 60px rgba(0,0,0,0.4),0 0 40px rgba(79,142,247,0.06);}
+.proj-visual{
+  height:170px;display:flex;align-items:center;justify-content:center;
+  font-size:52px;position:relative;overflow:hidden;
+}
+.proj-visual.p1{background:linear-gradient(135deg,#060f22 0%,#0d2250 50%,#0a1a40 100%);}
+.proj-visual.p2{background:linear-gradient(135deg,#061a0e 0%,#0d3d1e 50%,#082e16 100%);}
+.proj-visual.p3{background:linear-gradient(135deg,#0d0620 0%,#1e0d40 50%,#150830 100%);}
+.proj-visual-grid{
+  position:absolute;inset:0;
+  background-image:linear-gradient(rgba(79,142,247,0.06) 1px,transparent 1px),linear-gradient(90deg,rgba(79,142,247,0.06) 1px,transparent 1px);
+  background-size:30px 30px;
+}
+.proj-kpi-row{position:absolute;bottom:12px;left:12px;right:12px;display:flex;gap:6px;flex-wrap:wrap;}
+.proj-kpi{
+  background:rgba(4,8,15,0.7);border:1px solid rgba(79,142,247,0.2);
+  border-radius:6px;padding:4px 10px;font-size:10px;color:var(--accent2);
+  backdrop-filter:blur(8px);font-weight:500;
+}
+.proj-body{padding:22px 24px;}
+.proj-title{font-family:'Syne',sans-serif;font-size:17px;font-weight:700;margin-bottom:9px;letter-spacing:-0.3px;}
+.proj-desc{font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:14px;}
+.proj-stack{display:flex;flex-wrap:wrap;gap:6px;}
+
+/* CERTIFICATIONS */
+.certs-section{background:var(--bg2);}
+.certs-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:18px;margin-top:52px;}
+.cert-card{
+  background:var(--glass);border:1px solid var(--border);
+  border-radius:18px;padding:26px;
+  display:flex;gap:20px;align-items:flex-start;
+  backdrop-filter:blur(12px);
+  transition:border-color 0.3s,transform 0.3s,box-shadow 0.3s;
+  position:relative;overflow:hidden;
+}
+.cert-card::before{
+  content:'';position:absolute;top:0;left:0;bottom:0;width:2px;
+  opacity:0;transition:opacity 0.3s;
+}
+.cert-card.blue-cert::before{background:linear-gradient(180deg,var(--accent),var(--accent2));}
+.cert-card.green-cert::before{background:linear-gradient(180deg,var(--green),#059669);}
+.cert-card.purple-cert::before{background:linear-gradient(180deg,var(--accent3),#7c3aed);}
+.cert-card:hover{border-color:var(--border2);transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,0.3);}
+.cert-card:hover::before{opacity:1;}
+.cert-icon-wrap{
+  width:54px;height:54px;border-radius:14px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:24px;flex-shrink:0;
+}
+.cert-icon-wrap.blue{background:rgba(79,142,247,0.12);border:1px solid rgba(79,142,247,0.2);}
+.cert-icon-wrap.green{background:rgba(52,211,153,0.12);border:1px solid rgba(52,211,153,0.2);}
+.cert-icon-wrap.purple{background:rgba(167,139,250,0.12);border:1px solid rgba(167,139,250,0.2);}
+.cert-title{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;margin-bottom:10px;}
+.cert-skills{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:12px;}
+.cert-skill{
+  background:rgba(79,142,247,0.07);color:var(--text2);
+  font-size:10px;padding:3px 9px;border-radius:100px;
+  border:1px solid rgba(79,142,247,0.12);
+}
+.cert-badge{
+  display:inline-flex;align-items:center;gap:5px;
+  background:rgba(52,211,153,0.08);color:var(--green);
+  font-size:11px;padding:4px 12px;border-radius:100px;
+  border:1px solid rgba(52,211,153,0.18);font-weight:500;
+}
+
+/* AI SECTION */
+.ai-section{
+  background:var(--bg);
+  position:relative;overflow:hidden;
+}
+.ai-section::before{
+  content:'';position:absolute;
+  top:50%;left:50%;transform:translate(-50%,-50%);
+  width:600px;height:600px;border-radius:50%;
+  background:radial-gradient(circle,rgba(167,139,250,0.04) 0%,transparent 70%);
+  pointer-events:none;
+}
+.ai-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;margin-top:52px;}
+.ai-card{
+  background:var(--glass);
+  border:1px solid rgba(167,139,250,0.15);
+  border-radius:18px;padding:24px;
+  backdrop-filter:blur(12px);
+  transition:border-color 0.3s,transform 0.3s,box-shadow 0.3s;
+}
+.ai-card:hover{
+  border-color:rgba(167,139,250,0.35);
+  transform:translateY(-6px);
+  box-shadow:0 16px 40px rgba(0,0,0,0.3),0 0 30px rgba(167,139,250,0.05);
+}
+.ai-card-icon{
+  width:44px;height:44px;border-radius:12px;
+  background:rgba(167,139,250,0.1);border:1px solid rgba(167,139,250,0.2);
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;margin-bottom:14px;
+}
+.ai-card-title{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;margin-bottom:8px;}
+.ai-card-desc{font-size:13px;color:var(--text2);line-height:1.7;}
+.ai-prompt{
+  background:rgba(167,139,250,0.05);
+  border:1px solid rgba(167,139,250,0.15);
+  border-radius:9px;padding:12px 14px;margin-top:12px;
+  font-size:11px;color:#c4b5fd;font-family:'DM Mono',monospace;
+  line-height:1.6;font-style:italic;
+}
+
+/* CONTACT */
+.contact-section{background:var(--bg2);}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:start;margin-top:56px;}
+@media(max-width:900px){.contact-grid{grid-template-columns:1fr;gap:40px;}}
+.contact-info p{font-size:15px;color:var(--text2);line-height:1.85;margin-bottom:28px;}
+.contact-links{display:flex;flex-direction:column;gap:12px;}
+.clink{
+  display:flex;align-items:center;gap:14px;padding:14px 18px;
+  background:var(--glass);border:1px solid var(--border);
+  border-radius:13px;text-decoration:none;color:var(--text);
+  backdrop-filter:blur(12px);
+  transition:border-color 0.2s,transform 0.2s,box-shadow 0.2s;
+}
+.clink:hover{border-color:var(--border2);transform:translateX(6px);box-shadow:0 4px 20px rgba(0,0,0,0.2);}
+.clink-icon{
+  width:38px;height:38px;border-radius:10px;
+  background:rgba(79,142,247,0.1);border:1px solid rgba(79,142,247,0.18);
+  display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;
+}
+.clink strong{display:block;font-size:13px;font-weight:500;}
+.clink span{font-size:12px;color:var(--text2);}
+.cform{display:flex;flex-direction:column;gap:13px;}
+.cform input,.cform textarea{
+  background:rgba(8,15,30,0.8);border:1px solid var(--border);
+  border-radius:11px;padding:13px 16px;color:var(--text);
+  font-size:14px;font-family:'DM Sans',sans-serif;
+  outline:none;transition:border-color 0.2s,box-shadow 0.2s;
+  resize:none;backdrop-filter:blur(8px);
+}
+.cform input:focus,.cform textarea:focus{
+  border-color:rgba(79,142,247,0.4);
+  box-shadow:0 0 0 3px rgba(79,142,247,0.06);
+}
+.cform input::placeholder,.cform textarea::placeholder{color:var(--text3);}
+.cform textarea{height:115px;}
+.cform button{
+  background:linear-gradient(135deg,var(--accent),#2563eb);
+  color:#fff;padding:14px;border-radius:11px;border:none;
+  font-size:14px;font-weight:500;cursor:pointer;
+  font-family:'DM Sans',sans-serif;
+  transition:transform 0.2s,box-shadow 0.2s;
+  box-shadow:0 0 25px rgba(79,142,247,0.25);
+}
+.cform button:hover{transform:translateY(-2px);box-shadow:0 8px 35px rgba(79,142,247,0.45);}
+
+/* FOOTER */
+footer{
+  padding:32px 48px;border-top:1px solid var(--border);
+  display:flex;justify-content:space-between;align-items:center;
+  flex-wrap:wrap;gap:12px;position:relative;z-index:1;
+}
+.footer-left{font-size:13px;color:var(--text3);}
+.footer-left span{
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.footer-links{display:flex;gap:20px;}
+.footer-links a{font-size:13px;color:var(--text3);text-decoration:none;transition:color 0.2s;}
+.footer-links a:hover{color:var(--accent2);}
+
+/* SCROLL INDICATOR */
+.scroll-line{
+  position:fixed;top:0;left:0;height:2px;z-index:200;
+  background:linear-gradient(90deg,var(--accent),var(--accent2),var(--accent3));
+  transition:width 0.1s linear;
+}
+
+/* ANIMATIONS */
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(28px);}
+  to{opacity:1;transform:translateY(0);}
+}
+.fade-in{opacity:0;transform:translateY(24px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.fade-in.visible{opacity:1;transform:translateY(0);}
+.fade-in-left{opacity:0;transform:translateX(-24px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.fade-in-left.visible{opacity:1;transform:translateX(0);}
+</style>
+</head>
+<body>
+
+<!-- SCROLL PROGRESS -->
+<div class="scroll-line" id="scrollLine"></div>
+
+<!-- CUSTOM CURSOR -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- PARTICLES -->
+<canvas id="particles"></canvas>
+
+<nav>
+  <div class="nav-logo">Ajay<span>.</span></div>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#services">Services</a>
+    <a href="#experience">Experience</a>
+    <a href="#projects">Projects</a>
+    <a href="#certifications">Certifications</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <a href="https://www.fiverr.com/ajay_kukreti" target="_blank" class="nav-cta">Hire on Fiverr ↗</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-orb1"></div>
+  <div class="hero-orb2"></div>
+  <div class="hero-orb3"></div>
+  <div class="hero-inner">
+    <div class="hero-badge"><div class="hero-dot"></div> Open to Freelance &amp; Full-time Opportunities</div>
+    <h1>
+      Ajay<br/>
+      <span class="grad">Kukreti</span>
+    </h1>
+    <p class="hero-tagline">
+      Data Analyst &amp; <strong>AI Specialist</strong> — Gurugram, India
+    </p>
+    <p class="hero-desc">
+      Results-driven analyst with 2+ years of experience transforming raw data into
+      powerful dashboards and strategic insights. I leverage AI to deliver work
+      faster, smarter, and at a higher standard than conventional approaches.
+    </p>
+    <div class="hero-btns">
+      <a href="https://www.fiverr.com/ajay_kukreti" target="_blank" class="btn-glow">🚀 Hire on Fiverr</a>
+      <a href="#projects" class="btn-ghost">View My Work</a>
+      <a href="https://www.linkedin.com/in/ajaykukreti1" target="_blank" class="btn-ghost">LinkedIn ↗</a>
+      <a href="mailto:ajaykukretiji111@gmail.com" class="btn-ghost">Email Me</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-num">2<span class="accent">+</span></div>
+        <div class="stat-label">Years Experience</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">99<span class="accent">%</span></div>
+        <div class="stat-label">Data Accuracy</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">40<span class="accent">%</span></div>
+        <div class="stat-label">Time Saved</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">3</div>
+        <div class="stat-label">Certifications</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="about-section">
+  <div class="si">
+    <div class="stag fade-in">About Me</div>
+    <h2 class="stitle fade-in">Turning Data into <span class="grad">Decisions</span></h2>
+    <div class="about-grid">
+      <div class="about-text fade-in">
+        <p>I'm <strong>Ajay Kukreti</strong>, a results-driven Data Analyst based in Gurugram, India, with <strong>2+ years of hands-on experience</strong> in data operations, CRM management, MIS reporting, and business intelligence.</p>
+        <p>Currently serving as <strong>Data Management Executive at Shuraa Business Setup, Delhi</strong>, where I manage large-scale business data with <strong>99%+ accuracy</strong>, build Excel-based MIS reports and operational dashboards consumed daily by 5+ internal teams.</p>
+        <p>As a freelancer, I combine deep analytical expertise with cutting-edge <strong>AI tools — ChatGPT and Microsoft Copilot</strong> — to reduce reporting turnaround time by up to 40%. What used to take hours now takes minutes.</p>
+        <p>I hold a <strong>BA in Economics</strong> from Uttarakhand Open University and hold <strong>3 professional certifications</strong> covering Advanced Excel, Data Analytics, and Computer Technology.</p>
+      </div>
+      <div class="about-cards fade-in">
+        <div class="acard"><div class="acard-icon">🏢</div><div><div class="acard-t">Current Role</div><div class="acard-s">Data Management Executive @ Shuraa Business Setup, Delhi</div></div></div>
+        <div class="acard"><div class="acard-icon">📍</div><div><div class="acard-t">Location</div><div class="acard-s">Gurugram, Haryana, India</div></div></div>
+        <div class="acard"><div class="acard-icon">📞</div><div><div class="acard-t">Phone</div><div class="acard-s">+91-6395557326</div></div></div>
+        <div class="acard"><div class="acard-icon">📧</div><div><div class="acard-t">Email</div><div class="acard-s">ajaykukretiji111@gmail.com</div></div></div>
+        <div class="acard"><div class="acard-icon">🎓</div><div><div class="acard-t">Education</div><div class="acard-s">BA Economics — Uttarakhand Open University (2023–2026)</div></div></div>
+        <div class="acard"><div class="acard-icon">🏆</div><div><div class="acard-t">Certifications</div><div class="acard-s">Advanced Excel · Data Analytics · Field Technician (Computer)</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" class="skills-section">
+  <div class="si">
+    <div class="stag fade-in">Expertise</div>
+    <h2 class="stitle fade-in">Tools &amp; <span class="grad">Technologies</span></h2>
+    <p class="sdesc fade-in">A strong technical foundation across data, analytics, and AI — built through real-world experience.</p>
+    <div class="skills-grid">
+      <div class="skill-card fade-in"><span class="skill-icon">📊</span><div class="skill-name">Microsoft Excel</div><div class="skill-level">Expert</div><div class="skill-bar-bg"><div class="skill-bar" style="width:96%"></div></div></div>
+      <div class="skill-card fade-in"><span class="skill-icon">⚡</span><div class="skill-name">Power BI</div><div class="skill-level">Advanced</div><div class="skill-bar-bg"><div class="skill-bar" style="width:82%"></div></div></div>
+      <div class="skill-card fade-in"><span class="skill-icon">🔄</span><div class="skill-name">Power Query</div><div class="skill-level">Advanced</div><div class="skill-bar-bg"><div class="skill-bar" style="width:85%"></div></div></div>
+      <div class="skill-card fade-in"><span class="skill-icon">🗃️</span><div class="skill-name">SQL / MySQL</div><div class="skill-level">Intermediate</div><div class="skill-bar-bg"><div class="skill-bar" style="width:68%"></div></div></div>
+      <div class="skill-card fade-in"><span class="skill-icon">🐍</span><div class="skill-name">Python</div><div class="skill-level">Intermediate</div><div class="skill-bar-bg"><div class="skill-bar" style="width:60%"></div></div></div>
+      <div class="skill-card fade-in"><span class="skill-icon">🤖</span><div class="skill-name">ChatGPT / AI</div><div class="skill-level">Advanced</div><div class="skill-bar-bg"><div class="skill-bar" style="width:91%"></div></div></div>
+      <div class="skill-card fade-in"><span class="skill-icon">📈</span><div class="skill-name">Data Visualization</div><div class="skill-level">Advanced</div><div class="skill-bar-bg"><div class="skill-bar" style="width:88%"></div></div></div>
+      <div class="skill-card fade-in"><span class="skill-icon">🧹</span><div class="skill-name">Data Cleaning</div><div class="skill-level">Expert</div><div class="skill-bar-bg"><div class="skill-bar" style="width:95%"></div></div></div>
+      <div class="skill-card fade-in"><span class="skill-icon">📋</span><div class="skill-name">MIS Reporting</div><div class="skill-level">Expert</div><div class="skill-bar-bg"><div class="skill-bar" style="width:93%"></div></div></div>
+      <div class="skill-card fade-in"><span class="skill-icon">🗂️</span><div class="skill-name">CRM Systems</div><div class="skill-level">Advanced</div><div class="skill-bar-bg"><div class="skill-bar" style="width:85%"></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" class="services-section">
+  <div class="si">
+    <div class="stag fade-in">Fiverr Services</div>
+    <h2 class="stitle fade-in">What I Can <span class="grad">Do For You</span></h2>
+    <p class="sdesc fade-in">Three core services — delivered fast, accurately, and with unlimited revisions until you're satisfied.</p>
+    <div class="services-grid">
+      <div class="svc-card fade-in">
+        <div class="svc-icon-wrap">⚡</div>
+        <div class="svc-title">Power BI Dashboard</div>
+        <div class="svc-desc">Interactive Power BI dashboards with KPI cards, slicers, drill-through reports, advanced DAX measures, and bookmark-based filters. Real-time business intelligence tailored to your data.</div>
+        <div class="svc-tags"><span class="tag">Power BI</span><span class="tag">DAX</span><span class="tag">KPI Cards</span><span class="tag">Drill-through</span><span class="tag">Slicers</span></div>
+        <div class="svc-divider"></div>
+        <div class="svc-bottom">
+          <div class="svc-price">
+            <span class="from">Starting from</span>
+            <span class="amount">$15</span>
+          </div>
+          <a href="https://www.fiverr.com/ajay_kukreti" target="_blank" class="svc-btn">Order Now →</a>
+        </div>
+      </div>
+      <div class="svc-card fade-in">
+        <div class="svc-icon-wrap">🧹</div>
+        <div class="svc-title">Excel Data Cleaning</div>
+        <div class="svc-desc">Transform messy Excel or CSV data into clean, structured, and analysis-ready datasets. Remove duplicates, fix errors, standardize formats — 100% accuracy guaranteed on every delivery.</div>
+        <div class="svc-tags"><span class="tag">Excel</span><span class="tag">CSV</span><span class="tag">VLOOKUP</span><span class="tag">XLOOKUP</span><span class="tag">Pivot Tables</span></div>
+        <div class="svc-divider"></div>
+        <div class="svc-bottom">
+          <div class="svc-price">
+            <span class="from">Starting from</span>
+            <span class="amount">$10</span>
+          </div>
+          <a href="https://www.fiverr.com/ajay_kukreti" target="_blank" class="svc-btn">Order Now →</a>
+        </div>
+      </div>
+      <div class="svc-card fade-in">
+        <div class="svc-icon-wrap">📋</div>
+        <div class="svc-title">Excel Dashboard &amp; MIS</div>
+        <div class="svc-desc">Fully automated Excel dashboards with Power Query pipelines, dynamic charts, MIS reporting, and KPI tracking. Eliminate manual reporting and save hours every single month.</div>
+        <div class="svc-tags"><span class="tag">Excel</span><span class="tag">Power Query</span><span class="tag">MIS</span><span class="tag">Automation</span><span class="tag">VBA</span></div>
+        <div class="svc-divider"></div>
+        <div class="svc-bottom">
+          <div class="svc-price">
+            <span class="from">Starting from</span>
+            <span class="amount">$15</span>
+          </div>
+          <a href="https://www.fiverr.com/ajay_kukreti" target="_blank" class="svc-btn">Order Now →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" class="exp-section">
+  <div class="si">
+    <div class="stag fade-in">Career</div>
+    <h2 class="stitle fade-in">Work <span class="grad">Experience</span></h2>
+    <div class="exp-list">
+      <div class="exp-item fade-in">
+        <div class="exp-meta">
+          <div class="exp-period">Nov 2025 — Present</div>
+          <div class="exp-location">Delhi, India</div>
+          <div class="exp-duration">5 months</div>
+        </div>
+        <div class="exp-content">
+          <div class="exp-company">Shuraa Business Setup</div>
+          <div class="exp-role">Data Management Executive</div>
+          <ul class="exp-points">
+            <li>Managed large volumes of structured business data with <span class="exp-chip">99%+ accuracy</span> across all internal systems</li>
+            <li>Performed end-to-end data cleaning, validation, and formatting in Excel, ensuring full consistency across reporting pipelines</li>
+            <li>Built Excel-based MIS reports and operational summaries consumed by <span class="exp-chip">5+ internal teams</span> for strategic decision-making</li>
+            <li>Automated repetitive tasks using VLOOKUP/XLOOKUP, SUMIFS, COUNTIFS, and Pivot Tables — <span class="exp-chip">~30% effort reduction</span></li>
+            <li>Coordinated with cross-functional teams to identify and resolve data discrepancies, ensuring accurate submissions</li>
+          </ul>
+        </div>
+      </div>
+      <div class="exp-item fade-in">
+        <div class="exp-meta">
+          <div class="exp-period">Jul 2024 — Nov 2025</div>
+          <div class="exp-location">Gurugram, India</div>
+          <div class="exp-duration">1 year 5 months</div>
+        </div>
+        <div class="exp-content">
+          <div class="exp-company">Vidyakul</div>
+          <div class="exp-role">Data Management Specialist</div>
+          <ul class="exp-points">
+            <li>Maintained and updated <span class="exp-chip">10,000+ client & lead records</span> in CRM platforms (LeadSquared & Slash) with real-time data integrity</li>
+            <li>Performed daily data filtering and organized performance tracking sheets to monitor team KPIs effectively</li>
+            <li>Designed reporting dashboards in Excel and Power BI — <span class="exp-chip">40% faster report generation</span></li>
+            <li>Enforced data quality control standards, reducing errors and ensuring accurate documentation across all systems</li>
+          </ul>
+        </div>
+      </div>
+      <div class="exp-item fade-in">
+        <div class="exp-meta">
+          <div class="exp-period">Jan 2024 — Jul 2024</div>
+          <div class="exp-location">Gurugram, India</div>
+          <div class="exp-duration">7 months</div>
+        </div>
+        <div class="exp-content">
+          <div class="exp-company">Rooman Technologies</div>
+          <div class="exp-role">Data Entry Executive</div>
+          <ul class="exp-points">
+            <li>Entered and maintained employee and client datasets across spreadsheets and internal systems with high accuracy</li>
+            <li>Performed daily data updates, verification, and record organization for accurate, timely documentation</li>
+            <li>Prepared daily task reports and data summaries for leadership, maintaining formatting consistency and SLA compliance</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="projects-section">
+  <div class="si">
+    <div class="stag fade-in">Portfolio</div>
+    <h2 class="stitle fade-in">Featured <span class="grad">Projects</span></h2>
+    <p class="sdesc fade-in">Real-world projects built with actual data — demonstrating end-to-end analytical capability.</p>
+    <div class="projects-grid">
+      <div class="proj-card fade-in">
+        <div class="proj-visual p1">
+          <div class="proj-visual-grid"></div>
+          💳
+          <div class="proj-kpi-row">
+            <span class="proj-kpi">$4.22M Revenue</span>
+            <span class="proj-kpi">2,421 Cards</span>
+            <span class="proj-kpi">100K+ Transactions</span>
+          </div>
+        </div>
+        <div class="proj-body">
+          <div class="proj-title">Credit Card Business Analytics</div>
+          <div class="proj-desc">Interactive Excel dashboard analyzing 100K+ credit card transactions. Merged 3 datasets (Users, Cards, Transactions) via Power Query into a unified data model. Tracked $4.22M revenue, card brand performance, city-wise trends, age/gender spending, and credit risk distribution.</div>
+          <div class="proj-stack"><span class="tag">Excel</span><span class="tag">Power Query</span><span class="tag">Pivot Tables</span><span class="tag">Data Modeling</span></div>
+        </div>
+      </div>
+      <div class="proj-card fade-in">
+        <div class="proj-visual p2">
+          <div class="proj-visual-grid"></div>
+          🛒
+          <div class="proj-kpi-row">
+            <span class="proj-kpi">Power BI</span>
+            <span class="proj-kpi">DAX Measures</span>
+            <span class="proj-kpi">Auto Refresh</span>
+          </div>
+        </div>
+        <div class="proj-body">
+          <div class="proj-title">Quick Commerce MIS Dashboard</div>
+          <div class="proj-desc">End-to-end analytics workflow — cleaned raw order data (Revenue, Delivery SLA, Categories) using Power Query with automated refresh. Built interactive Power BI dashboard with KPI cards, Bar/Line/Donut charts, Date/Category/City slicers, and bookmark Reset button.</div>
+          <div class="proj-stack"><span class="tag">Power BI</span><span class="tag">DAX</span><span class="tag">Power Query</span><span class="tag">MIS</span></div>
+        </div>
+      </div>
+      <div class="proj-card fade-in">
+        <div class="proj-visual p3">
+          <div class="proj-visual-grid"></div>
+          🤖
+          <div class="proj-kpi-row">
+            <span class="proj-kpi">AI-Powered</span>
+            <span class="proj-kpi">10x Faster</span>
+            <span class="proj-kpi">Python + GPT</span>
+          </div>
+        </div>
+        <div class="proj-body">
+          <div class="proj-title">AI-Powered Data Automation</div>
+          <div class="proj-desc">Leveraged ChatGPT and Python (Pandas) to automate data cleaning, formula generation, and report building at scale. Tasks previously requiring 5+ hours now complete in under 30 minutes — delivering higher quality and faster turnaround for every client.</div>
+          <div class="proj-stack"><span class="tag">Python</span><span class="tag">ChatGPT</span><span class="tag">Pandas</span><span class="tag">Excel</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications" class="certs-section">
+  <div class="si">
+    <div class="stag fade-in">Credentials</div>
+    <h2 class="stitle fade-in">Certifications &amp; <span class="grad">Qualifications</span></h2>
+    <p class="sdesc fade-in">Professionally verified skills across data analytics, Excel, and technology.</p>
+    <div class="certs-grid">
+      <div class="cert-card blue-cert fade-in">
+        <div class="cert-icon-wrap blue">📊</div>
+        <div>
+          <div class="cert-title">Advanced Excel</div>
+          <div class="cert-skills">
+            <span class="cert-skill">MS Excel (Advanced)</span>
+            <span class="cert-skill">Microsoft Power Query</span>
+            <span class="cert-skill">Excel Dashboards</span>
+            <span class="cert-skill">Pivot Tables</span>
+            <span class="cert-skill">LOOKUP Functions</span>
+          </div>
+          <div class="cert-badge">✓ Certified</div>
+        </div>
+      </div>
+      <div class="cert-card green-cert fade-in">
+        <div class="cert-icon-wrap green">📈</div>
+        <div>
+          <div class="cert-title">Data Analytics</div>
+          <div class="cert-skills">
+            <span class="cert-skill">MS Excel (Advanced)</span>
+            <span class="cert-skill">Microsoft Power BI</span>
+            <span class="cert-skill">Python</span>
+            <span class="cert-skill">MySQL</span>
+          </div>
+          <div class="cert-badge">✓ Certified</div>
+        </div>
+      </div>
+      <div class="cert-card purple-cert fade-in">
+        <div class="cert-icon-wrap purple">💻</div>
+        <div>
+          <div class="cert-title">Field Technician — Computer Peripheral</div>
+          <div class="cert-skills">
+            <span class="cert-skill">MS Office</span>
+            <span class="cert-skill">Computer Hardware</span>
+            <span class="cert-skill">Advanced Excel</span>
+            <span class="cert-skill">Networking</span>
+          </div>
+          <div class="cert-badge">✓ Certified</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AI SECTION -->
+<section class="ai-section">
+  <div class="si">
+    <div class="stag fade-in">AI-Powered Workflow</div>
+    <h2 class="stitle fade-in">Delivered <span class="grad">10x Faster</span> with AI</h2>
+    <p class="sdesc fade-in">I integrate AI into every project — delivering faster, smarter, and higher-quality results than traditional approaches.</p>
+    <div class="ai-grid">
+      <div class="ai-card fade-in">
+        <div class="ai-card-icon">💬</div>
+        <div class="ai-card-title">ChatGPT + Excel</div>
+        <div class="ai-card-desc">Generate complex Excel formulas instantly — XLOOKUP, nested IFs, dynamic arrays — error-free and production-ready in seconds, not hours.</div>
+        <div class="ai-prompt">"Write a formula to find the top 5 sales this month and highlight them green"</div>
+      </div>
+      <div class="ai-card fade-in">
+        <div class="ai-card-icon">⚡</div>
+        <div class="ai-card-title">AI + Power BI</div>
+        <div class="ai-card-desc">Generate optimized DAX measures and Power Query transformations with AI — tested, production-ready, and deployed immediately without errors.</div>
+        <div class="ai-prompt">"Write a DAX measure for month-over-month revenue growth %"</div>
+      </div>
+      <div class="ai-card fade-in">
+        <div class="ai-card-icon">🐍</div>
+        <div class="ai-card-title">Python Automation</div>
+        <div class="ai-card-desc">AI-generated Python scripts automate repetitive data tasks at scale — merge hundreds of files, clean datasets, and build reports automatically.</div>
+        <div class="ai-prompt">"Merge 20 Excel files, remove duplicates, export as final.xlsx"</div>
+      </div>
+      <div class="ai-card fade-in">
+        <div class="ai-card-icon">🚀</div>
+        <div class="ai-card-title">The Result</div>
+        <div class="ai-card-desc">Clients receive higher quality, faster turnaround, and more value. Tasks that took 5 hours now take 30 minutes — every single time.</div>
+        <div class="ai-prompt">Faster · Better quality · More value · Happy clients ✓</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact-section">
+  <div class="si">
+    <div class="stag fade-in">Get In Touch</div>
+    <h2 class="stitle fade-in">Let's Work <span class="grad">Together</span></h2>
+    <div class="contact-grid">
+      <div class="fade-in">
+        <p class="contact-info">Whether you need a dashboard, MIS report, data cleaning, or AI-powered automation — I'm ready to deliver fast, accurate, and professional results. Let's discuss your project.</p>
+        <div class="contact-links">
+          <a href="mailto:ajaykukretiji111@gmail.com" class="clink"><div class="clink-icon">📧</div><div><strong>Email</strong><span>ajaykukretiji111@gmail.com</span></div></a>
+          <a href="tel:+916395557326" class="clink"><div class="clink-icon">📞</div><div><strong>Phone</strong><span>+91-6395557326</span></div></a>
+          <a href="https://www.fiverr.com/ajay_kukreti" target="_blank" class="clink"><div class="clink-icon">🚀</div><div><strong>Fiverr</strong><span>fiverr.com/ajay_kukreti</span></div></a>
+          <a href="https://www.linkedin.com/in/ajaykukreti1" target="_blank" class="clink"><div class="clink-icon">💼</div><div><strong>LinkedIn</strong><span>linkedin.com/in/ajaykukreti1</span></div></a>
+        </div>
+      </div>
+      <div class="cform fade-in">
+        <input type="text" placeholder="Your name"/>
+        <input type="email" placeholder="Your email address"/>
+        <input type="text" placeholder="Project type (e.g. Power BI / Excel Dashboard)"/>
+        <textarea placeholder="Tell me about your project..."></textarea>
+        <button onclick="alert('Thank you! I\'ll get back to you within 24 hours. 🙏')">Send Message →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-left">Designed &amp; built by <span>Ajay Kukreti</span> — Data Analyst &amp; AI Specialist · Gurugram, India</div>
+  <div class="footer-links">
+    <a href="https://www.fiverr.com/ajay_kukreti">Fiverr</a>
+    <a href="https://www.linkedin.com/in/ajaykukreti1">LinkedIn</a>
+    <a href="mailto:ajaykukretiji111@gmail.com">Email</a>
+  </div>
+</footer>
+
+<script>
+// SCROLL PROGRESS
+window.addEventListener('scroll',()=>{
+  const el=document.getElementById('scrollLine');
+  const pct=(window.scrollY/(document.body.scrollHeight-window.innerHeight))*100;
+  el.style.width=pct+'%';
+});
+
+// CURSOR
+const cur=document.getElementById('cursor');
+const ring=document.getElementById('cursorRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX;my=e.clientY;
+  cur.style.left=(mx-4)+'px';cur.style.top=(my-4)+'px';
+});
+function animRing(){
+  rx+=(mx-rx-16)*0.12;ry+=(my-ry-16)*0.12;
+  ring.style.left=rx+'px';ring.style.top=ry+'px';
+  requestAnimationFrame(animRing);
+}
+animRing();
+document.querySelectorAll('a,button').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cur.style.transform='scale(2.5)';ring.style.transform='scale(1.5)';});
+  el.addEventListener('mouseleave',()=>{cur.style.transform='scale(1)';ring.style.transform='scale(1)';});
+});
+
+// PARTICLES
+const canvas=document.getElementById('particles');
+const ctx=canvas.getContext('2d');
+canvas.width=window.innerWidth;canvas.height=window.innerHeight;
+window.addEventListener('resize',()=>{canvas.width=window.innerWidth;canvas.height=window.innerHeight;});
+const pts=[];
+for(let i=0;i<80;i++){
+  pts.push({
+    x:Math.random()*canvas.width,y:Math.random()*canvas.height,
+    vx:(Math.random()-0.5)*0.3,vy:(Math.random()-0.5)*0.3,
+    r:Math.random()*1.5+0.5,
+    alpha:Math.random()*0.4+0.1
+  });
+}
+function drawParticles(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  pts.forEach(p=>{
+    p.x+=p.vx;p.y+=p.vy;
+    if(p.x<0||p.x>canvas.width)p.vx*=-1;
+    if(p.y<0||p.y>canvas.height)p.vy*=-1;
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.fillStyle=`rgba(79,142,247,${p.alpha})`;
+    ctx.fill();
+  });
+  pts.forEach((a,i)=>{
+    pts.slice(i+1).forEach(b=>{
+      const d=Math.hypot(a.x-b.x,a.y-b.y);
+      if(d<120){
+        ctx.beginPath();
+        ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);
+        ctx.strokeStyle=`rgba(79,142,247,${0.06*(1-d/120)})`;
+        ctx.lineWidth=0.5;ctx.stroke();
+      }
+    });
+  });
+  requestAnimationFrame(drawParticles);
+}
+drawParticles();
+
+// FADE IN ON SCROLL
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach((e,i)=>{
+    if(e.isIntersecting){
+      setTimeout(()=>e.target.classList.add('visible'),i*60);
+    }
+  });
+},{threshold:0.08});
+document.querySelectorAll('.fade-in,.fade-in-left').forEach(el=>obs.observe(el));
+
+// NAV ACTIVE
+window.addEventListener('scroll',()=>{
+  const secs=document.querySelectorAll('section[id]');
+  const links=document.querySelectorAll('.nav-links a');
+  let cur='';
+  secs.forEach(s=>{if(window.scrollY>=s.offsetTop-140)cur=s.id;});
+  links.forEach(l=>{
+    const active=l.getAttribute('href')==='#'+cur;
+    l.style.color=active?'#f0f4ff':'';
+  });
+});
+</script>
+</body>
+</html>
